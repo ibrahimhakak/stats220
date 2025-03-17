@@ -8,7 +8,7 @@ A little about me:
 - I am taking STATS 220 because I am interested in being a data analyst when I graduate, so I'm taking stats papers this year
 - I am interested in learning about how data models work and how large scale analysis can be conducted for businesses
 
-A meme that captures how I currently feel about my university studies is ![](https://tenor.com/view/ishowspeed-crying-sad-very-sad-speed-gif-24923499) ishowspeed crying
+A meme that captures how I currently feel about my university studies is ![](https://media1.tenor.com/m/nHcKNdMPcTcAAAAd/ishowspeed-crying.gif) ishowspeed crying
 
 # More About Me
 
@@ -21,4 +21,4 @@ A meme that captures how I currently feel about my university studies is ![](htt
 - I was a software intern at [Eurotec](https://eurotec.co.nz/), where I gained hands-on experience in software development and data analysis
 - I worked at [PaknSave](https://www.paknsave.co.nz/) for three years
 
-Another GIF, ![](https://tenor.com/view/sensational-future-gif-7256574) sensational...
+Another GIF, ![](https://media1.tenor.com/m/DaF5ljy1xH8AAAAC/sensational.gif) sensational...
