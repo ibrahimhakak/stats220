@@ -1,0 +1,132 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  font-family: 'Courier New', monospace;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  margin: 40px;
+  line-height: 1.6;
+}
+
+h2 {
+  color: #58a6ff;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 6px;
+  margin-top: 40px;
+}
+
+p {
+  font-size: 16px;
+  color: #c9d1d9;
+}
+
+code {
+  background-color: #161b22;
+  color: #79c0ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+```
+
+## What's it tracking?
+
+These summaries are tracking the trends in the duration of the ad, how long they were and what the average runtime of the ad was. This is useful for helping agencies and people that work in ad space track to find the optimal ad run time.
+
+What I'm analyzing here is the shortest ad duration, the longest ad duration and the mean ad duration as well as the total amount of ads that were observed so an idea can be formed of how long ads should be running for.
+
+```{r}
+library(tidyverse)
+csv_file <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRpitpxgwC-GnYIEDzOaZeDQT1wM5MKG0WjbIguWaYIu0xhPVmXS8gIokCcrxT2dLCe4_QNdzLBrZBE/pub?output=csv"
+logged_data <- read_csv(csv_file)
+
+latest_data <- logged_data %>%
+  rename(
+    platform = 2,
+    ad_type = 3,
+    ad_category = 4,
+    duration = 5,
+    relevance = 6
+  )
+
+nrow(latest_data)
+summary(latest_data$duration)
+
+min_duration <- min(latest_data$duration, na.rm = TRUE)
+
+max_duration <- max(latest_data$duration, na.rm = TRUE)
+
+mean_duration <- mean(latest_data$duration, na.rm = TRUE) %>%
+  round(1)
+
+total_ads <- nrow(latest_data)
+
+most_common_ad <- latest_data %>%
+  count(ad_type) %>%
+  arrange(desc(n)) %>%
+  slice(1) %>%
+  pull(ad_type)
+
+paste("The shortest ad observed was", min_duration, "seconds.")
+paste("The longest ad observed was", max_duration, "seconds.")
+paste("The average ad duration was", mean_duration, "seconds.")
+paste("Total number of ads observed:", total_ads)
+```
+
+## Graphical Representation of Ads Observed in Platform
+
+The bar graph below helps in showing the ads that were observed and the source of them on social media platforms, this takes data from the CSV and makes it so that its able to track the most frequent social media platforms so agencies can know which optimal platform they should use for advertisements.
+
+```{R}
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = platform), fill = "#6A5ACD") +
+  labs(
+    title = "Ads Observed by Platform",
+    x = "Platform",
+    y = "Number of Ads",
+    caption = "Source: Observed via Social Media Platform"
+  )
+```
+
+## Graphical Representation of Ad Types observed in User Feeds
+
+This tracks the different types of ads that appeared on the user feeds in categories such as fashion, food, technology or other content that was even related to cryptocurrencies, by analyzing which ads are more frequent we can understand what industries are the best for targeting users.
+
+```{R}
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = ad_type), fill = "#FFA07A") +
+  labs(
+    title = "Distribution of Ad Types",
+    x = "Ad Type",
+    y = "Frequency",
+    caption = "Observed from user feeds"
+  )
+```
+
+## Graphical Representation of Ad Relevance based on the User
+
+This tracks the relevancy of the ads that users felt were most relevant to them based on their perception of the ad at the time of viewing. This helps in revealing how well platforms are targeting ads and if current marketing strategies are useful if their content aligns with user interests or may be outdated or out of place.
+
+```{R}
+latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = relevance), fill = "#90EE90") +
+  labs(
+    title = "How Relevant Were the Ads?",
+    x = "Perceived Relevance",
+    y = "Count",
+    caption = "User interpretation of ad targeting"
+  )
+```
