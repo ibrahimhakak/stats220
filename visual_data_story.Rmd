@@ -1,0 +1,69 @@
+---
+title: Ads and Algorithms, my visual data story.
+output: html_document
+---
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{js}
+$(function() {
+  $(".level2").css('visibility', 'hidden');
+  $(".level2").first().css('visibility', 'visible');
+  $(".container-fluid").height($(".container-fluid").height() + 300);
+  $(window).on('scroll', function() {
+    $('h2').each(function() {
+      var h2Top = $(this).offset().top - $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (h2Top >= 0 && h2Top <= windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'visible');
+      } else if (h2Top > windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'hidden');
+      }
+    });
+  });
+})
+```
+
+```{css}
+:root{--b8:#08306B;--b7:#08519C;--b6:#2171B5;--b5:#4292C6;--b4:#6BAED6;
+      --b3:#9ECAE1;--b2:#C6DBEF;--b1:#DEEBF7;}
+body{background:var(--b1);color:#222;line-height:1.6;font-family:sans-serif;}
+h1,h2,strong{color:var(--b8);}
+img,.level2{background:#fff;border-radius:8px;padding:6px;}
+.figcaption{display:none}
+```
+
+## Introduction - The why
+
+All of us can testify to the fact that ads are a part of our everyday life, whether on our cellphones, driving and seeing billboards or reading the morning paper. I decided I wanted to gather data to tell a story about how people track their ads and what days of the week they see the ads and on the platforms they see the ads to better understand how people interact with ads throughout the day.
+
+## Plot 1 - The Ads that are logged per weekday
+
+In this first plot, I wanted to log the different weekdays that the ads appear, the plot below shows the days and the counts of ads that were logged. This is important as advertisers may need this data to gather a better understanding of what days are best to run an advertisement campaign.
+
+![Bar chart of ads per weekday](plot1.png){width=85% alt="Bar chart"}
+
+We can come to the conclusion from this plot that the best days to advertise would be on a Friday, Monday and Wednesday as those seem to be the dates with the highest recorded volumes of ads, this shows when people are more attentive and engaged with the ads on their devices.
+
+## Plot 2 - The ads by device type across the weekdays
+
+The second plot here breaks down the number of ads that were logged by the type of devices that were used across each weekday. This was useful for understanding which device are more active on different days of the week, which can assist advertisers better tailor their campaigns to specific platforms or devices.
+
+![ chart of ads per device type](plot2.png){width=85% alt="Plot2 chart"}
+This graph shows that laptop, and mobile advertising on Monday, Tuesdays and Fridays were the best dates to advertise to those tailored devices, and that mobile phones consistently dominated ad views across all weekdays which highlights the importance of optimising advertisements for mobile formats.
+
+## Plot 3 - Distribution of ad duration by platform
+
+This third plot presents what time of the day that people were most likely to see ads. The bar chart below shows the number of the logged during differnt parts of the day: Morning, Afternoon, Evening, and Night.
+
+![ chart of ads duration platform type](plot3.png){width=85% alt="Plot3 chart"}
+From this we can see that the afternoon and the evening had the highest number of ads, night time had the lowest number of ads showing that advertisers are more active during peak screen time when users are likely to be relaxing or browsing after work or school hours.
+
+## Summarisation of Data
+Together, these visualizations provide a valuable insight into when ads are seen, how they're accessed and how long they run across times of the day. There was clear peaks in ad visibility on specific weekdays and a strong dominance regarding mobile phone usage and the distinct difference between ad duration by platform where it shows the difference between quick scrolling and long form content. These patterns suggest that effective advertising strategies should consider the timing and the platform behaviour by making campaigns of when users interact with ads.
+
+## Final wrap
